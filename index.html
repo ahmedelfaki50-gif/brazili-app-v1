@@ -185,11 +185,17 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
+    // إعدادات مشروعك الجديد (flash-d5bf1)
     const firebaseConfig = {
-        apiKey: "AIzaSyDx-MBQ4sZg7PEtjkWotwi64f92mF58V9E",
-        databaseURL: "https://saree3-9ec29-default-rtdb.firebaseio.com/",
-        projectId: "saree3-9ec29"
+        apiKey: "AIzaSyAsVsOtJy1ZZyfIjaiTbRgeuXeERHq2Szs",
+        authDomain: "flash-d5bf1.firebaseapp.com",
+        databaseURL: "https://flash-d5bf1-default-rtdb.firebaseio.com/",
+        projectId: "flash-d5bf1",
+        storageBucket: "flash-d5bf1.firebasestorage.app",
+        messagingSenderId: "97520856710",
+        appId: "1:97520856710:web:2a660ee9ddeffb096fab07"
     };
+    
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
@@ -218,6 +224,9 @@
     async function register() {
         const n = document.getElementById('rName').value, p = document.getElementById('rPhone').value, ps = document.getElementById('rPass').value;
         if(!n || !p || ps.length < 6) { showSoon("أكمل البيانات بدقة"); return; }
+        // التحقق من بادئة الرقم 01 كما طلبت
+        if(!p.startsWith("01")) { showSoon("يجب أن يبدأ الرقم بـ 01"); return; }
+
         const check = await db.ref('users/' + p).once('value');
         if(check.exists()) { showSoon("هذا الرقم مسجل مسبقاً"); return; }
         const data = {name:n, phone:p, pass:ps};
@@ -286,9 +295,7 @@
         const g = document.getElementById('marketGrid'); g.innerHTML = "";
         s.forEach(c => {
             const p = c.val();
-            const pId = c.key; // معرف المنتج الفريد في Firebase
-            
-            // التحقق: هل المستخدم الحالي هو صاحب المنتج؟
+            const pId = c.key; 
             const isOwner = currentUser && (currentUser.phone === p.phone);
             
             const actionBtn = isOwner 
@@ -304,7 +311,6 @@
         });
     });
 
-    // دالة حذف المنتج
     async function deleteProduct(pId) {
         if(confirm("هل أنت متأكد من مسح هذا المنتج من السوق؟")) {
             await db.ref('market_products/' + pId).remove();
@@ -352,7 +358,7 @@
     // --- المشاوير ---
     const drivers = [
         {n:"عمر عبد الله", v:"ركشة", p:"0121606445", t:"motorcycle"},
-        {n:"أنوار شنان", v:"ركشة", p:"0113461046", t:"motorcycle"},
+        {n:"أنور شنان", v:"ركشة", p:"0113461046", t:"motorcycle"},
         {n:"جابر عبد الجليل", v:"حافلة", p:"0127879864", t:"bus"},
         {n:"عبد الجليل يوسف", v:"أكسنت", p:"0117655646", t:"car"},
         {n:"فهمي عبد الله", v:"أكسنت", p:"0114924425", t:"car"}
@@ -366,7 +372,7 @@
         });
     }
 
-    // --- Offline Management ---
+    // --- إدارة الاتصال بالإنترنت ---
     let isOffline = false;
     async function checkConnection() {
         if(document.getElementById('splashScreen').style.display !== 'none') return;
