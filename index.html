@@ -406,7 +406,7 @@
         const snap = await db.ref('queue').once('value');
         let num = (snap.val() ? snap.val().currentNumber : 0) + 1;
         await db.ref('queue/currentNumber').set(num);
-        let phone = (shift === "الصباحية") ? "249119298358" : "249116031000";
+        let phone = (shift === "الصباحية") ? "249119298358" : "249116031931";
         const msg = `حجز طبي:%0Aالمريض: ${name}%0Aاليوم: ${day}%0Aالفترة: ${shift}%0Aالدور: ${num}`;
         window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
     }
