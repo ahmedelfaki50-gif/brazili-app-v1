@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "97520856710",
+    "project_id": "flash-d5bf1",
+    "storage_bucket": "flash-d5bf1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97520856710:android:1b21646cdfcb531d6fab07",
+        "android_client_info": {
+          "package_name": "com.ahmedelfaki50"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdtTS37w5NNHOoZGT4srUp8IKwsyF29h0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
