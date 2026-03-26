@@ -28,13 +28,11 @@
         .grid-item { background: white; padding: 22px; border-radius: 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 10px rgba(0,0,0,0.03); cursor: pointer; transition: transform 0.2s; }
         .grid-item i { color: var(--gold-dark); background: #fffbeb; padding: 10px; border-radius: 12px; font-size: 22px; }
 
-        /* --- Sections --- */
         .section-view { display: none; padding: 15px; animation: slideUp 0.4s ease; }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .back-btn { background: #1f2937; color: white; border: none; padding: 14px; border-radius: 15px; width: 100%; margin-bottom: 20px; font-family: 'Tajawal'; font-weight: bold; cursor: pointer; }
         input.text-input, select.text-input { width: 100%; padding: 16px; border-radius: 15px; border: 1px solid #eee; margin-bottom: 12px; box-sizing: border-box; font-family: 'Tajawal'; outline: none; appearance: none; }
 
-        /* --- Market --- */
         .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .product-card { background: white; border-radius: 15px; padding: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.02); }
         .product-img-box { width: 100%; height: 110px; background: #f8f9fa; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
@@ -42,7 +40,6 @@
         .order-btn { background: var(--primary-blue); color: white; border: none; width: 100%; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 5px; }
         .delete-btn { background: var(--danger-red); color: white; border: none; width: 100%; padding: 8px; border-radius: 10px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 5px; }
 
-        /* --- Driver Card --- */
         .driver-card { background: white; margin-bottom: 12px; border-radius: 18px; padding: 15px; display: flex; align-items: center; border: 1px solid #edf2f7; }
         .driver-icon-box { width: 50px; height: 50px; background: #f0f4ff; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--primary-blue); margin-left: 12px; }
 
@@ -97,7 +94,7 @@
             <h3 style="margin:0; color: #166534;"><i class="fas fa-seedling"></i> نهضة الولي</h3>
             <p style="font-size: 13px; color: #4b5563; margin-top: 5px;">مبادرات شبابية لتطوير وتعمير القرية</p>
         </div>
-        <div style="background: white; padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 1px solid #e5e7eb;">
+        <div id="nahdaNewsContainer" style="background: white; padding: 15px; border-radius: 20px; margin-bottom: 15px; border: 1px solid #e5e7eb;">
             <h4 style="margin-top:0; color: #1e40af;"><i class="fas fa-bullhorn"></i> منادي القرية الرقمي</h4>
             <div id="nahdaNews" style="max-height: 180px; overflow-y: auto; font-size: 14px; background: #f9fafb; padding: 10px; border-radius: 12px;">
                 <p style="color:#9ca3af; text-align:center;">جاري تحميل المستجدات...</p>
@@ -220,6 +217,22 @@
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // --- [نظام التحديث المرتبط بـ Firebase] ---
+    const CURRENT_VERSION = "1.0.0"; 
+
+    function checkForUpdates() {
+        // قراءة النسخة من المسار المباشر كما في صورتك
+        db.ref('latest_version').on('value', (snapshot) => {
+            const latestVersion = snapshot.val();
+            // إذا كانت النسخة في فايربيز تختلف عن النسخة الحالية في الكود
+            if (latestVersion && latestVersion !== CURRENT_VERSION) {
+                alert("✨ تحديث جديد متوفر لتطبيق سريع! يرجى إعادة تحميل الصفحة.");
+                location.reload(true); 
+            }
+        });
+    }
+    // ------------------------------------------
+
     let currentUser = JSON.parse(localStorage.getItem('user_saree3')) || null;
 
     const doctorSchedule = {
@@ -264,7 +277,6 @@
         } else { showSoon("بيانات الدخول غير صحيحة ❌"); }
     }
 
-    // استعادة كلمة السر عبر واتساب
     async function recoveryPassword() {
         const p = document.getElementById('lPhone').value;
         if(!p) { showSoon("أدخل رقم هاتفك أولاً في خانة الدخول"); return; }
@@ -441,6 +453,7 @@
 
     window.onload = () => {
         initDrivers(); updateUI();
+        checkForUpdates(); // تشغيل فحص التحديث فور الفتح
         setTimeout(() => {
             document.getElementById('splashScreen').style.opacity = '0';
             setTimeout(() => { document.getElementById('splashScreen').style.display = 'none'; checkConnection(); }, 800);
