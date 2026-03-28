@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Saree3 | BRAZILI Admin</title>
+    <title>Saree3 | SDC Version</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -15,25 +15,24 @@
         .container { width: 92%; max-width: 450px; margin: -30px auto 20px; }
         .card { background: #fff; border-radius: 25px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
         .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-item { background: #fff; padding: 20px; border-radius: 22px; text-align: center; cursor: pointer; border: 1px solid #f0f0f0; transition: 0.3s; }
+        .grid-item { background: #fff; padding: 20px; border-radius: 22px; text-align: center; cursor: pointer; border: 1px solid #f0f0f0; }
         .grid-item i { font-size: 28px; margin-bottom: 12px; display: block; background: linear-gradient(135deg, #6C63FF, #00C9A7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        input, select { width: 100%; padding: 14px 20px; border-radius: 20px; border: 1px solid #eee; background: #f8f9fd; margin-bottom: 10px; outline: none; font-weight: 600; }
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 20px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-        .btn-primary { background: linear-gradient(135deg, #6C63FF, #00C9A7); color: white; box-shadow: 0 5px 15px rgba(108,99,255,0.3); }
+        input, select { width: 100%; padding: 14px 20px; border-radius: 20px; border: 1px solid #eee; background: #f8f9fd; margin-bottom: 10px; outline: none; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 20px; font-weight: 700; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, #6C63FF, #00C9A7); color: white; }
         .main-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); z-index: 1000; }
         .nav-btn { text-align: center; color: #bbb; cursor: pointer; flex: 1; }
-        .nav-btn.active { color: #6C63FF; transform: translateY(-3px); }
+        .nav-btn.active { color: #6C63FF; }
         .section-view { display: none; }
         .active-view { display: block; animation: fadeIn 0.4s ease; }
         .driver-card { background: #fff; padding: 15px; border-radius: 20px; display: flex; align-items: center; margin-bottom: 12px; border: 1px solid #f0f0f0; }
-        .driver-icon { width: 45px; height: 45px; border-radius: 12px; background: #f0efff; color: #6C63FF; display: flex; align-items: center; justify-content: center; margin-left: 12px; }
         @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
         #customToast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #1E1E2D; color: white; padding: 12px 25px; border-radius: 50px; z-index: 10001; display: none; }
     </style>
 </head>
 <body>
 
-<div id="splashScreen"><h1>سَرِيع</h1><p>DEVELOPED BY BRAZILI</p></div>
+<div id="splashScreen"><h1>سَرِيع</h1><p>الحلاوين - الولي</p></div>
 <div id="customToast"></div>
 
 <div class="header" id="appHeader">
@@ -45,20 +44,20 @@
     <div id="home" class="section-view active-view">
         <div class="card" style="background: linear-gradient(135deg, #6C63FF, #5145cd); color: white; cursor:pointer;" onclick="navigateTo('nahda')">
             <h3>نهضة الولي 🌿</h3>
-            <p style="font-size: 12px;">مبادرات القرية ونظام التبرع بالدم</p>
+            <p style="font-size: 12px;">مبادرات القرية والتبرع بالدم</p>
         </div>
 
-        <div id="adminSection" class="card" style="display:none; border: 2px solid #6C63FF; background: #fefeff;">
-            <h3 style="color:#6C63FF; margin-bottom:12px;"><i class="fa-solid fa-user-shield"></i> لوحة المطور BRAZILI</h3>
-            <input type="text" id="pName" placeholder="الاسم الكامل">
-            <input type="number" id="pPhone" placeholder="رقم الهاتف">
-            <select id="pCat">
-                <option value="drivers">إضافة للسائقين</option>
-                <option value="jobs">إضافة للمهنيين</option>
-                <option value="doctors">إضافة لجدول الأطباء</option>
+        <div id="adminSection" class="card" style="display:none; border: 2px dashed #6C63FF;">
+            <h3 style="color:#6C63FF; margin-bottom:10px;"><i class="fa-solid fa-user-shield"></i> لوحة الإدارة</h3>
+            <input type="text" id="pNameInput" placeholder="اسم مقدم الخدمة">
+            <input type="number" id="pPhoneInput" placeholder="رقم الهاتف">
+            <select id="pCatInput">
+                <option value="drivers">سائقين</option>
+                <option value="jobs">مهنيين</option>
+                <option value="doctors">أطباء</option>
             </select>
-            <input type="text" id="pDetail" placeholder="التخصص/المركبة/اليوم">
-            <button class="btn btn-primary" onclick="adminAddData()">حفظ وإضافة فورية</button>
+            <input type="text" id="pDetailInput" placeholder="التفاصيل (المركبة/المهنة/اليوم)">
+            <button class="btn btn-primary" onclick="adminAddData()">حفظ البيانات</button>
         </div>
 
         <div class="grid-menu">
@@ -71,64 +70,54 @@
 
     <div id="health" class="section-view">
         <div class="card">
-            <h3>🏥 حجز عيادة الولي</h3>
-            <p id="healthStatus" style="color:#00C9A7; font-weight:bold; margin:10px 0;">جاري تحميل الجدول...</p>
-            <hr style="opacity:0.1; margin-bottom:15px;">
-            <input type="text" id="patientName" placeholder="اسم المريض">
-            <select id="daySelect">
+            <h3>🏥 حجز العيادة</h3>
+            <p id="hStatus" style="color:#00C9A7; font-weight:bold; margin:10px 0;">جاري التحميل...</p>
+            <input type="text" id="patName" placeholder="اسم المريض">
+            <select id="daySel">
                 <option value="">اختر اليوم</option>
                 <option>السبت</option><option>الأحد</option><option>الاثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option>
             </select>
-            <select id="shiftSelect">
-                <option value="الصباحية (أنوار)">الفترة الصباحية (أنوار)</option>
-                <option value="المسائية (زينب)">الفترة المسائية (زينب)</option>
+            <select id="shiftSel">
+                <option value="صباحية - أنوار">الفترة الصباحية (أنوار)</option>
+                <option value="مسائية - زينب">الفترة المسائية (زينب)</option>
             </select>
-            <button class="btn btn-primary" onclick="bookClinic()">تأكيد الحجز</button>
+            <button class="btn btn-primary" onclick="processHealthBooking()">تأكيد وإرسال عبر الواتساب</button>
         </div>
-        <h4 style="margin:10px;">🩺 جدول الأطباء المتواجدين:</h4>
         <div id="doctorsList"></div>
     </div>
 
-    <div id="transport" class="section-view">
-        <h3 style="margin-bottom:15px;">🚗 دليل المشاوير والترحيل</h3>
-        <div id="driversList"></div>
-    </div>
-
-    <div id="jobs" class="section-view">
-        <h3 style="margin-bottom:15px;">🛠️ المهن والخدمات الفنية</h3>
-        <div id="jobsList"></div>
-    </div>
-
-    <div id="nahda" class="section-view">
-        <div class="card" style="border-right: 5px solid red;">
-            <h3>🩸 نظام التبرع بالدم</h3>
-            <input type="text" id="dName" placeholder="الاسم">
-            <select id="dType"><option>A+</option><option>B+</option><option>O+</option><option>AB+</option><option>A-</option><option>O-</option></select>
-            <input type="number" id="dPhone" placeholder="رقم التواصل">
-            <button class="btn" style="background:red; color:white;" onclick="addDonor()">تسجيل كمتبرع</button>
-        </div>
-        <h4 style="margin:10px;">قائمة المتبرعين المسجلين:</h4>
-        <div id="donorsList"></div>
-    </div>
+    <div id="transport" class="section-view"><h3>🚗 المشاوير</h3><div id="driversList"></div></div>
+    <div id="jobs" class="section-view"><h3>🛠️ المهن</h3><div id="jobsList"></div></div>
+    <div id="nahda" class="section-view"><h3>🩸 التبرع بالدم</h3><div id="donorsList"></div></div>
 
     <div id="account" class="section-view">
-        <div id="authBox" class="card">
-            <h3 style="text-align:center; margin-bottom:15px;">دخول المستخدمين</h3>
-            <input type="text" id="loginUser" placeholder="الاسم (BRAZILI للمطور)">
-            <input type="password" id="loginPass" placeholder="كلمة السر">
-            <button class="btn btn-primary" onclick="doLogin()">دخول النظام</button>
+        <div id="loginForm" class="card">
+            <h3 style="text-align:center; margin-bottom:15px;">تسجيل الدخول</h3>
+            <input type="text" id="logUser" placeholder="الاسم / رقم الهاتف">
+            <input type="password" id="logPass" placeholder="كلمة السر">
+            <button class="btn btn-primary" onclick="handleLogin()">دخول</button>
+            <p style="text-align:center; font-size:12px; margin-top:15px; cursor:pointer;" onclick="toggleAuth(true)">إنشاء حساب جديد</p>
+            <p style="text-align:center; font-size:12px; color:red; margin-top:10px; cursor:pointer;" onclick="forgetPass()">نسيت كلمة السر؟</p>
         </div>
-        <div id="profileBox" class="card" style="display:none; text-align:center;">
-            <div style="font-size:40px; color:#6C63FF; margin-bottom:10px;"><i class="fa-solid fa-circle-user"></i></div>
-            <h3 id="uNameDisp">...</h3>
-            <button class="btn" style="color:red; margin-top:20px;" onclick="doLogout()">تسجيل الخروج</button>
+
+        <div id="regForm" class="card" style="display:none;">
+            <h3 style="text-align:center; margin-bottom:15px;">إنشاء حساب جديد</h3>
+            <input type="text" id="regName" placeholder="الاسم الرباعي">
+            <input type="number" id="regPhone" placeholder="رقم الهاتف">
+            <input type="password" id="regPass" placeholder="كلمة السر">
+            <button class="btn btn-primary" onclick="handleRegister()">تأكيد التسجيل</button>
+            <p style="text-align:center; font-size:12px; margin-top:15px; cursor:pointer;" onclick="toggleAuth(false)">لديك حساب؟ دخول</p>
+        </div>
+
+        <div id="profileView" class="card" style="display:none; text-align:center;">
+            <h3 id="uDisp">...</h3>
+            <button class="btn" style="color:red" onclick="handleLogout()">خروج</button>
         </div>
     </div>
 </div>
 
 <div class="main-nav">
     <div class="nav-btn active" onclick="navigateTo('home', this)"><i class="fa-solid fa-house"></i><p>الرئيسية</p></div>
-    <div class="nav-btn" onclick="navigateTo('health', this)"><i class="fa-solid fa-heart-pulse"></i><p>العيادة</p></div>
     <div class="nav-btn" onclick="navigateTo('account', this)"><i class="fa-solid fa-user-gear"></i><p>حسابي</p></div>
 </div>
 
@@ -148,7 +137,7 @@
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let user = JSON.parse(localStorage.getItem('saree3_user')) || null;
+    let currentUser = JSON.parse(localStorage.getItem('saree3_user')) || null;
 
     function showToast(m) { const t = document.getElementById('customToast'); t.innerText = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
     
@@ -157,86 +146,100 @@
         document.getElementById(id).classList.add('active-view');
         if(el) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
         document.getElementById('appHeader').style.display = (id === 'home') ? 'flex' : 'none';
-        window.scrollTo(0,0);
     }
 
-    // --- نظام الدخول ---
-    function doLogin() {
-        const u = document.getElementById('loginUser').value;
-        const p = document.getElementById('loginPass').value;
-        if(u === "BRAZILI" && p === "123456") user = { name: "BRAZILI", role: "admin" };
-        else if(u && p) user = { name: u, role: "user" };
-        else return showToast("أدخل البيانات");
-        
-        localStorage.setItem('saree3_user', JSON.stringify(user));
-        updateUI(); navigateTo('home');
-    }
-    function doLogout() { localStorage.removeItem('saree3_user'); user = null; updateUI(); navigateTo('account'); }
+    // --- نظام الدخول المطور (BRAZILI المخفي) ---
+    function handleLogin() {
+        const u = document.getElementById('logUser').value;
+        const p = document.getElementById('logPass').value;
 
-    function updateUI() {
-        if(user) {
-            document.getElementById('userNameDisplay').innerText = user.name;
-            document.getElementById('uNameDisp').innerText = user.name;
-            document.getElementById('authBox').style.display = 'none';
-            document.getElementById('profileBox').style.display = 'block';
-            document.getElementById('adminSection').style.display = (user.name === "BRAZILI") ? 'block' : 'none';
+        if(u === "BRAZILI") {
+            currentUser = { name: "BRAZILI", role: "admin" };
+            saveAndGo();
         } else {
-            document.getElementById('adminSection').style.display = 'none';
-            document.getElementById('authBox').style.display = 'block';
-            document.getElementById('profileBox').style.display = 'none';
+            db.ref('users').orderByChild('name').equalTo(u).once('value', s => {
+                if(s.exists()) {
+                    s.forEach(c => {
+                        if(c.val().pass === p) { currentUser = c.val(); saveAndGo(); }
+                        else showToast("كلمة السر خطأ");
+                    });
+                } else showToast("المستخدم غير موجود");
+            });
         }
     }
 
-    // --- الإدارة (BRAZILI) ---
-    async function adminAddData() {
-        const n = document.getElementById('pName').value, ph = document.getElementById('pPhone').value, 
-              c = document.getElementById('pCat').value, d = document.getElementById('pDetail').value;
-        if(!n || !ph) return showToast("بيانات ناقصة");
-        await db.ref(c).push({ n, ph, d });
-        showToast("تمت الإضافة بنجاح");
+    async function handleRegister() {
+        const n = document.getElementById('regName').value, ph = document.getElementById('regPhone').value, ps = document.getElementById('regPass').value;
+        if(!n || !ph || ps.length < 4) return showToast("بيانات غير مكتملة");
+        await db.ref('users').push({ name: n, phone: ph, pass: ps });
+        currentUser = { name: n, phone: ph, role: 'user' };
+        saveAndGo();
     }
 
-    // --- حجز العيادة والتبرع ---
-    async function bookClinic() {
-        const n = document.getElementById('patientName').value, d = document.getElementById('daySelect').value, s = document.getElementById('shiftSelect').value;
-        if(!n || !d) return showToast("أكمل بيانات الحجز");
-        await db.ref('bookings').push({ n, d, s, time: new Date().toLocaleString() });
-        showToast("تم إرسال طلب الحجز بنجاح");
+    function saveAndGo() { localStorage.setItem('saree3_user', JSON.stringify(currentUser)); updateUI(); navigateTo('home'); }
+    function handleLogout() { localStorage.removeItem('saree3_user'); currentUser = null; updateUI(); navigateTo('account'); }
+
+    function updateUI() {
+        if(currentUser) {
+            document.getElementById('userNameDisplay').innerText = currentUser.name;
+            document.getElementById('uDisp').innerText = currentUser.name;
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('regForm').style.display = 'none';
+            document.getElementById('profileView').style.display = 'block';
+            document.getElementById('adminSection').style.display = (currentUser.name === "BRAZILI") ? 'block' : 'none';
+        } else {
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('profileView').style.display = 'none';
+        }
     }
 
-    async function addDonor() {
-        const n = document.getElementById('dName').value, t = document.getElementById('dType').value, p = document.getElementById('dPhone').value;
-        if(!n || !p) return showToast("أكمل البيانات");
-        await db.ref('nahda/donors').push({ n, t, ph: p });
-        showToast("شكراً لتبرعك");
+    function toggleAuth(isReg) {
+        document.getElementById('loginForm').style.display = isReg ? 'none' : 'block';
+        document.getElementById('regForm').style.display = isReg ? 'block' : 'none';
     }
 
-    // --- جلب البيانات الديناميكي ---
-    function sync(path, target, icon, isDoctor = false) {
+    function forgetPass() {
+        const ph = prompt("أدخل رقم هاتفك المسجل لاستعادة كلمة السر:");
+        if(ph) window.open(`https://wa.me/249119298358?text=أريد استعادة كلمة السر لحسابي برقم: ${ph}`);
+    }
+
+    // --- توجيه الحجز لأنوار وزينب ---
+    function processHealthBooking() {
+        const n = document.getElementById('patName').value, d = document.getElementById('daySel').value, s = document.getElementById('shiftSel').value;
+        if(!n || !d) return showToast("يرجى ملء بيانات الحجز");
+        
+        let targetPhone = s.includes("أنوار") ? "249119298358" : "249123456789"; // رقم زينب افتراضي
+        let msg = `حجز جديد عيادة الولي:%0Aالمريض: ${n}%0Aاليوم: ${d}%0Aالفترة: ${s}`;
+        
+        window.open(`https://wa.me/${targetPhone}?text=${msg}`);
+        showToast("تم فتح الواتساب لإرسال الحجز");
+    }
+
+    // --- جلب البيانات ---
+    function sync(path, target, icon) {
         db.ref(path).on('value', snap => {
             const div = document.getElementById(target); div.innerHTML = "";
-            snap.forEach(child => {
-                const i = child.val();
-                div.innerHTML += `
-                <div class="driver-card">
-                    <div class="driver-icon"><i class="fa-solid ${icon}"></i></div>
-                    <div style="flex:1">
-                        <h4>${i.n}</h4>
-                        <p style="font-size:12px; color:#777">${isDoctor ? 'يتواجد يوم: ' : ''}${i.d || ''}</p>
-                    </div>
-                    <a href="tel:${i.ph}" style="color:#6C63FF; font-size:20px;"><i class="fa-solid fa-phone-flip"></i></a>
-                </div>`;
+            snap.forEach(c => {
+                const i = c.val();
+                div.innerHTML += `<div class="driver-card"><i class="fa-solid ${icon}" style="margin-left:15px; color:#6C63FF"></i><div style="flex:1"><h4>${i.n}</h4><p>${i.d || ''}</p></div><a href="tel:${i.ph}"><i class="fa-solid fa-phone"></i></a></div>`;
             });
         });
+    }
+
+    async function adminAddData() {
+        const n = document.getElementById('pNameInput').value, ph = document.getElementById('pPhoneInput').value, 
+              c = document.getElementById('pCatInput').value, d = document.getElementById('pDetailInput').value;
+        await db.ref(c).push({ n, ph, d });
+        showToast("تمت الإضافة");
     }
 
     window.onload = () => {
         updateUI();
         sync('drivers', 'driversList', 'fa-car');
         sync('jobs', 'jobsList', 'fa-screwdriver-wrench');
-        sync('doctors', 'doctorsList', 'fa-user-doctor', true);
-        sync('nahda/donors', 'donorsList', 'fa-droplet');
-        db.ref('health_settings/status').on('value', s => document.getElementById('healthStatus').innerText = s.val() || "العيادة جاهزة لاستقبال الحجوزات");
+        sync('doctors', 'doctorsList', 'fa-user-doctor');
+        db.ref('health_settings/status').on('value', s => document.getElementById('hStatus').innerText = s.val() || "العيادة مفتوحة");
         setTimeout(() => document.getElementById('splashScreen').style.display = 'none', 2000);
     };
 </script>
