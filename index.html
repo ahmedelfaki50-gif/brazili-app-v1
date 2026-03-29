@@ -3,122 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Saree3 | SDC Version</title>
+    <title>Saree3 | BRAZILI Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         *{ margin:0; padding:0; box-sizing:border-box; font-family:'Cairo', sans-serif; }
-        body { background: #f8f9fd; min-height: 100vh; color: #1E1E2D; padding-bottom: 100px; }
+        body { background: #f4f7f6; min-height: 100vh; color: #1E1E2D; padding-bottom: 100px; }
+        
         #splashScreen { position: fixed; inset: 0; background: linear-gradient(135deg, #6C63FF, #00C9A7); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; color: white; transition: 0.8s; }
-        .header { background: linear-gradient(135deg, #6C63FF, #00C9A7); padding: 40px 20px 60px; border-radius: 0 0 40px 40px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .container { width: 92%; max-width: 450px; margin: -30px auto 20px; }
-        .card { background: #fff; border-radius: 25px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        
+        .header { background: linear-gradient(135deg, #6C63FF, #00C9A7); padding: 50px 20px 80px; border-radius: 0 0 50px 50px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* الحاوية تبدأ من أعلى المنتصف لمحاكاة طول الشاشة */
+        .container { width: 92%; max-width: 500px; margin: -50px auto 20px; min-height: 70vh; display: flex; flex-direction: column; gap: 15px; }
+        
+        .card { background: #fff; border-radius: 25px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); animation: slideUp 0.5s ease; border: 1px solid #f0f0f0; }
+        
+        /* زر الرجوع الجميل في كل قسم */
+        .back-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; color: #6C63FF; cursor: pointer; font-weight: 700; background: #fff; width: fit-content; padding: 12px 22px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
         .grid-menu { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .grid-item { background: #fff; padding: 20px; border-radius: 22px; text-align: center; cursor: pointer; border: 1px solid #f0f0f0; }
-        .grid-item i { font-size: 28px; margin-bottom: 12px; display: block; background: linear-gradient(135deg, #6C63FF, #00C9A7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        input, select { width: 100%; padding: 14px 20px; border-radius: 20px; border: 1px solid #eee; background: #f8f9fd; margin-bottom: 10px; outline: none; }
-        .btn { width: 100%; padding: 15px; border: none; border-radius: 20px; font-weight: 700; cursor: pointer; }
+        .menu-item { background: #fff; border-radius: 22px; padding: 25px 15px; text-align: center; border: 1px solid #eee; transition: 0.3s; cursor: pointer; }
+        .menu-item i { font-size: 30px; margin-bottom: 12px; display: block; }
+
+        /* تنسيق الأوكورديون */
+        .acc-head { padding: 20px; background: #f8f9fa; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 700; margin-bottom: 10px; border: 1px solid #eee; }
+        .acc-body { display: none; padding: 10px; animation: fadeIn 0.4s ease; }
+
+        input, select, textarea { width: 100%; padding: 16px; border-radius: 20px; border: 1px solid #eee; background: #fdfdfd; margin-bottom: 12px; outline: none; font-size: 15px; }
+        .btn { width: 100%; padding: 16px; border: none; border-radius: 20px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-primary { background: linear-gradient(135deg, #6C63FF, #00C9A7); color: white; }
-        .main-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 12px 0; border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); z-index: 1000; }
-        .nav-btn { text-align: center; color: #bbb; cursor: pointer; flex: 1; }
+
+        .item-card { background: #f9f9f9; padding: 15px; border-radius: 20px; text-align: center; margin-bottom: 10px; border: 1px solid #eee; }
+        
+        .main-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-around; padding: 15px 0; border-radius: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 1000; }
+        .nav-btn { text-align: center; color: #bbb; flex: 1; font-size: 11px; cursor: pointer; }
         .nav-btn.active { color: #6C63FF; }
+        
         .section-view { display: none; }
-        .active-view { display: block; animation: fadeIn 0.4s ease; }
-        .driver-card { background: #fff; padding: 15px; border-radius: 20px; display: flex; align-items: center; margin-bottom: 12px; border: 1px solid #f0f0f0; }
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
-        #customToast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #1E1E2D; color: white; padding: 12px 25px; border-radius: 50px; z-index: 10001; display: none; }
+        .active-view { display: block; }
+        
+        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
     </style>
 </head>
 <body>
 
-<div id="splashScreen"><h1>سَرِيع</h1><p>الحلاوين - الولي</p></div>
-<div id="customToast"></div>
+<div id="splashScreen"><h1>سَرِيع</h1><p>AL-WALI • BRAZILI</p></div>
 
 <div class="header" id="appHeader">
-    <div><h2>مرحباً بك</h2><p id="userNameDisplay">ضيف الكريم</p></div>
-    <div style="width:45px; height:45px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center;" onclick="navigateTo('account')"><i class="fa-solid fa-user"></i></div>
+    <div><h2 id="welcomeMsg">سريع</h2><p>خدمات قرية الولي</p></div>
+    <div onclick="navigateTo('account')" style="font-size: 24px; opacity: 0.8;"><i class="fa-solid fa-user-circle"></i></div>
 </div>
 
 <div class="container">
     <div id="home" class="section-view active-view">
-        <div class="card" style="background: linear-gradient(135deg, #6C63FF, #5145cd); color: white; cursor:pointer;" onclick="navigateTo('nahda')">
-            <h3>نهضة الولي 🌿</h3>
-            <p style="font-size: 12px;">مبادرات القرية والتبرع بالدم</p>
-        </div>
-
-        <div id="adminSection" class="card" style="display:none; border: 2px dashed #6C63FF;">
-            <h3 style="color:#6C63FF; margin-bottom:10px;"><i class="fa-solid fa-user-shield"></i> لوحة الإدارة</h3>
-            <input type="text" id="pNameInput" placeholder="اسم مقدم الخدمة">
-            <input type="number" id="pPhoneInput" placeholder="رقم الهاتف">
-            <select id="pCatInput">
-                <option value="drivers">سائقين</option>
-                <option value="jobs">مهنيين</option>
-                <option value="doctors">أطباء</option>
+        <div id="adminPanel" class="card" style="display:none; border: 2px solid #6C63FF;">
+            <h3 style="margin-bottom:12px;">لوحة تحكم BRAZILI</h3>
+            <input type="text" id="aName" placeholder="الاسم">
+            <input type="number" id="aPhone" placeholder="الهاتف">
+            <select id="aCat">
+                <option value="drivers">سائق (ركشة/سيارة)</option>
+                <option value="markets">سوبر ماركت</option>
+                <option value="jobs">فني/مهني</option>
+                <option value="doctors">طبيب/صيدلية</option>
             </select>
-            <input type="text" id="pDetailInput" placeholder="التفاصيل (المركبة/المهنة/اليوم)">
-            <button class="btn btn-primary" onclick="adminAddData()">حفظ البيانات</button>
+            <input type="text" id="aDetail" placeholder="التفاصيل (مثلاً: ركشة)">
+            <button class="btn btn-primary" onclick="handleAdminAdd()">حفظ البيانات</button>
         </div>
 
         <div class="grid-menu">
-            <div class="grid-item" onclick="navigateTo('health')"><i class="fa-solid fa-heart-pulse"></i><span>الصحة</span></div>
-            <div class="grid-item" onclick="navigateTo('transport')"><i class="fa-solid fa-car-side"></i><span>المشاوير</span></div>
-            <div class="grid-item" onclick="navigateTo('jobs')"><i class="fa-solid fa-screwdriver-wrench"></i><span>المهن</span></div>
-            <div class="grid-item" onclick="navigateTo('account')"><i class="fa-solid fa-user-gear"></i><span>حسابي</span></div>
+            <div class="menu-item" onclick="navigateTo('health')"><i class="fa-solid fa-hand-holding-medical" style="color:#ff4757;"></i> الصحة</div>
+            <div class="menu-item" onclick="navigateTo('markets')"><i class="fa-solid fa-shop" style="color:#2ed573;"></i> السوق</div>
+            <div class="menu-item" onclick="navigateTo('transport')"><i class="fa-solid fa-truck-fast" style="color:#1e90ff;"></i> المشاوير</div>
+            <div class="menu-item" onclick="navigateTo('jobs')"><i class="fa-solid fa-tools" style="color:#ffa502;"></i> المهنيين</div>
+            <div class="menu-item" onclick="navigateTo('islamic')"><i class="fa-solid fa-moon" style="color:#2ecc71;"></i> فتاوى</div>
+            <div class="menu-item" onclick="navigateTo('nahda')"><i class="fa-solid fa-tint" style="color:#eb4d4b;"></i> النهضة</div>
         </div>
     </div>
 
     <div id="health" class="section-view">
-        <div class="card">
-            <h3>🏥 حجز العيادة</h3>
-            <p id="hStatus" style="color:#00C9A7; font-weight:bold; margin:10px 0;">جاري التحميل...</p>
-            <input type="text" id="patName" placeholder="اسم المريض">
-            <select id="daySel">
-                <option value="">اختر اليوم</option>
-                <option>السبت</option><option>الأحد</option><option>الاثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option>
-            </select>
-            <select id="shiftSel">
-                <option value="صباحية - أنوار">الفترة الصباحية (أنوار)</option>
-                <option value="مسائية - زينب">الفترة المسائية (زينب)</option>
-            </select>
-            <button class="btn btn-primary" onclick="processHealthBooking()">تأكيد وإرسال عبر الواتساب</button>
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div class="card" style="border-right: 6px solid #ff4757;">
+            <h3>حجز العيادة</h3>
+            <input type="text" id="pntName" placeholder="اسم المريض">
+            <select id="pntDay"><option>السبت</option><option>الأحد</option><option>الاثنين</option><option>الثلاثاء</option><option>الأربعاء</option><option>الخميس</option></select>
+            <button class="btn btn-primary" onclick="sendBooking()">تأكيد الحجز (واتساب)</button>
         </div>
-        <div id="doctorsList"></div>
+        <div id="docsDisplay"></div>
     </div>
 
-    <div id="transport" class="section-view"><h3>🚗 المشاوير</h3><div id="driversList"></div></div>
-    <div id="jobs" class="section-view"><h3>🛠️ المهن</h3><div id="jobsList"></div></div>
-    <div id="nahda" class="section-view"><h3>🩸 التبرع بالدم</h3><div id="donorsList"></div></div>
+    <div id="markets" class="section-view">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div class="card">
+            <h3>💬 دردشة السوق</h3>
+            <div id="chatMessages" style="height:220px; overflow-y:auto; background:#f9f9f9; border-radius:15px; padding:12px; margin-bottom:10px;"></div>
+            <div style="display:flex; gap:5px;">
+                <input type="text" id="chatInput" placeholder="رسالة للجميع..." style="margin-bottom:0;">
+                <button onclick="sendChatMessage()" style="width:55px; background:#6C63FF; color:white; border:none; border-radius:15px;"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div id="mktsDisplay"></div>
+    </div>
+
+    <div id="transport" class="section-view">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        
+        <div class="acc-head" onclick="toggleAcc('rikDiv')"><span>🚕 ركشات الولي</span><i class="fa-solid fa-chevron-down"></i></div>
+        <div id="rikDiv" class="acc-body"><div id="rikDisplay"></div></div>
+
+        <div class="acc-head" onclick="toggleAcc('carDiv')"><span>🚗 سيارات وحافلات</span><i class="fa-solid fa-chevron-down"></i></div>
+        <div id="carDiv" class="acc-body"><div id="carDisplay"></div></div>
+
+        <div class="acc-head" onclick="toggleAcc('truckDiv')"><span>🚚 نقل بضائع وأثاث</span><i class="fa-solid fa-chevron-down"></i></div>
+        <div id="truckDiv" class="acc-body"><div id="truckDisplay"></div></div>
+    </div>
+
+    <div id="jobs" class="section-view">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div id="jobsDisplay"></div>
+    </div>
+
+    <div id="nahda" class="section-view">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div class="card" style="border-right: 6px solid #eb4d4b;">
+            <h3>🩸 بنك دم الولي</h3>
+            <select id="bloodType"><option>O+</option><option>A+</option><option>B+</option><option>AB+</option><option>O-</option></select>
+            <button class="btn" style="background:#eb4d4b; color:white;" onclick="addDonor()">تسجيل فصيلتي</button>
+        </div>
+        <div id="donorsDisplay"></div>
+    </div>
+
+    <div id="islamic" class="section-view">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div class="card">
+            <h3>🕌 اسأل عن فتوى</h3>
+            <textarea id="fatwaQ" placeholder="اكتب سؤالك هنا..." style="height:100px;"></textarea>
+            <button class="btn btn-primary" onclick="searchFatwa()">البحث في جوجل</button>
+        </div>
+    </div>
 
     <div id="account" class="section-view">
-        <div id="loginForm" class="card">
-            <h3 style="text-align:center; margin-bottom:15px;">تسجيل الدخول</h3>
-            <input type="text" id="logUser" placeholder="الاسم / رقم الهاتف">
-            <input type="password" id="logPass" placeholder="كلمة السر">
+        <div class="back-nav" onclick="navigateTo('home')"><i class="fa-solid fa-arrow-right"></i> الرئيسية</div>
+        <div id="authPanel" class="card">
+            <h3>تسجيل الدخول</h3>
+            <input type="text" id="lUser" placeholder="الاسم أو الهاتف">
+            <input type="password" id="lPass" placeholder="كلمة السر">
             <button class="btn btn-primary" onclick="handleLogin()">دخول</button>
-            <p style="text-align:center; font-size:12px; margin-top:15px; cursor:pointer;" onclick="toggleAuth(true)">إنشاء حساب جديد</p>
-            <p style="text-align:center; font-size:12px; color:red; margin-top:10px; cursor:pointer;" onclick="forgetPass()">نسيت كلمة السر؟</p>
+            <p onclick="toggleReg(true)" style="text-align:center; color:#6C63FF; margin-top:20px; font-weight:700; cursor:pointer;">إنشاء حساب جديد</p>
         </div>
-
-        <div id="regForm" class="card" style="display:none;">
-            <h3 style="text-align:center; margin-bottom:15px;">إنشاء حساب جديد</h3>
-            <input type="text" id="regName" placeholder="الاسم الرباعي">
-            <input type="number" id="regPhone" placeholder="رقم الهاتف">
-            <input type="password" id="regPass" placeholder="كلمة السر">
+        <div id="regPanel" class="card" style="display:none;">
+            <h3>إنشاء حساب جديد</h3>
+            <input type="text" id="rName" placeholder="الاسم الكامل">
+            <input type="number" id="rPhone" placeholder="رقم الهاتف">
+            <input type="password" id="rPass" placeholder="كلمة السر">
             <button class="btn btn-primary" onclick="handleRegister()">تأكيد التسجيل</button>
-            <p style="text-align:center; font-size:12px; margin-top:15px; cursor:pointer;" onclick="toggleAuth(false)">لديك حساب؟ دخول</p>
+            <p onclick="toggleReg(false)" style="text-align:center; color:#777; margin-top:15px; cursor:pointer;">رجوع للدخول</p>
         </div>
-
-        <div id="profileView" class="card" style="display:none; text-align:center;">
-            <h3 id="uDisp">...</h3>
-            <button class="btn" style="color:red" onclick="handleLogout()">خروج</button>
+        <div id="userPanel" class="card" style="display:none; text-align:center;">
+            <h3 id="uTitle">...</h3>
+            <button class="btn" style="color:red; margin-top:25px; background:#fff0f0;" onclick="handleLogout()">تسجيل خروج</button>
         </div>
     </div>
 </div>
 
 <div class="main-nav">
-    <div class="nav-btn active" onclick="navigateTo('home', this)"><i class="fa-solid fa-house"></i><p>الرئيسية</p></div>
-    <div class="nav-btn" onclick="navigateTo('account', this)"><i class="fa-solid fa-user-gear"></i><p>حسابي</p></div>
+    <div class="nav-btn active" onclick="navigateTo('home', this)"><i class="fa-solid fa-home"></i><p>الرئيسية</p></div>
+    <div class="nav-btn" onclick="navigateTo('account', this)"><i class="fa-solid fa-user-circle"></i><p>حسابي</p></div>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -134,114 +186,129 @@
         messagingSenderId: "97520856710",
         appId: "1:97520856710:web:2a660ee9ddeffb096fab07"
     };
-    if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    let currentUser = JSON.parse(localStorage.getItem('saree3_user')) || null;
+    let user = JSON.parse(localStorage.getItem('saree3_user')) || null;
 
-    function showToast(m) { const t = document.getElementById('customToast'); t.innerText = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); }
-    
     function navigateTo(id, el) {
         document.querySelectorAll('.section-view').forEach(s => s.classList.remove('active-view'));
         document.getElementById(id).classList.add('active-view');
         if(el) { document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
         document.getElementById('appHeader').style.display = (id === 'home') ? 'flex' : 'none';
+        window.scrollTo(0, 0);
     }
 
-    // --- نظام الدخول المطور (BRAZILI المخفي) ---
-    function handleLogin() {
-        const u = document.getElementById('logUser').value;
-        const p = document.getElementById('logPass').value;
+    function toggleAcc(id) {
+        const target = document.getElementById(id);
+        const isOpen = target.style.display === "block";
+        document.querySelectorAll('.acc-body').forEach(b => b.style.display = "none");
+        target.style.display = isOpen ? "none" : "block";
+    }
 
-        if(u === "BRAZILI") {
-            currentUser = { name: "BRAZILI", role: "admin" };
-            saveAndGo();
-        } else {
-            db.ref('users').orderByChild('name').equalTo(u).once('value', s => {
-                if(s.exists()) {
-                    s.forEach(c => {
-                        if(c.val().pass === p) { currentUser = c.val(); saveAndGo(); }
-                        else showToast("كلمة السر خطأ");
-                    });
-                } else showToast("المستخدم غير موجود");
-            });
-        }
+    function toggleReg(show) { 
+        document.getElementById('authPanel').style.display = show ? 'none' : 'block'; 
+        document.getElementById('regPanel').style.display = show ? 'block' : 'none'; 
     }
 
     async function handleRegister() {
-        const n = document.getElementById('regName').value, ph = document.getElementById('regPhone').value, ps = document.getElementById('regPass').value;
-        if(!n || !ph || ps.length < 4) return showToast("بيانات غير مكتملة");
-        await db.ref('users').push({ name: n, phone: ph, pass: ps });
-        currentUser = { name: n, phone: ph, role: 'user' };
-        saveAndGo();
-    }
-
-    function saveAndGo() { localStorage.setItem('saree3_user', JSON.stringify(currentUser)); updateUI(); navigateTo('home'); }
-    function handleLogout() { localStorage.removeItem('saree3_user'); currentUser = null; updateUI(); navigateTo('account'); }
-
-    function updateUI() {
-        if(currentUser) {
-            document.getElementById('userNameDisplay').innerText = currentUser.name;
-            document.getElementById('uDisp').innerText = currentUser.name;
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('regForm').style.display = 'none';
-            document.getElementById('profileView').style.display = 'block';
-            document.getElementById('adminSection').style.display = (currentUser.name === "BRAZILI") ? 'block' : 'none';
-        } else {
-            document.getElementById('adminSection').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('profileView').style.display = 'none';
+        const n = document.getElementById('rName').value, ph = document.getElementById('rPhone').value, ps = document.getElementById('rPass').value;
+        if(n && ph && ps) {
+            const newUser = { name: n, phone: ph, pass: ps };
+            await db.ref('users').push(newUser);
+            user = newUser; save();
         }
     }
 
-    function toggleAuth(isReg) {
-        document.getElementById('loginForm').style.display = isReg ? 'none' : 'block';
-        document.getElementById('regForm').style.display = isReg ? 'block' : 'none';
-    }
-
-    function forgetPass() {
-        const ph = prompt("أدخل رقم هاتفك المسجل لاستعادة كلمة السر:");
-        if(ph) window.open(`https://wa.me/249119298358?text=أريد استعادة كلمة السر لحسابي برقم: ${ph}`);
-    }
-
-    // --- توجيه الحجز لأنوار وزينب ---
-    function processHealthBooking() {
-        const n = document.getElementById('patName').value, d = document.getElementById('daySel').value, s = document.getElementById('shiftSel').value;
-        if(!n || !d) return showToast("يرجى ملء بيانات الحجز");
-        
-        let targetPhone = s.includes("أنوار") ? "249119298358" : "249123456789"; // رقم زينب افتراضي
-        let msg = `حجز جديد عيادة الولي:%0Aالمريض: ${n}%0Aاليوم: ${d}%0Aالفترة: ${s}`;
-        
-        window.open(`https://wa.me/${targetPhone}?text=${msg}`);
-        showToast("تم فتح الواتساب لإرسال الحجز");
-    }
-
-    // --- جلب البيانات ---
-    function sync(path, target, icon) {
-        db.ref(path).on('value', snap => {
-            const div = document.getElementById(target); div.innerHTML = "";
-            snap.forEach(c => {
-                const i = c.val();
-                div.innerHTML += `<div class="driver-card"><i class="fa-solid ${icon}" style="margin-left:15px; color:#6C63FF"></i><div style="flex:1"><h4>${i.n}</h4><p>${i.d || ''}</p></div><a href="tel:${i.ph}"><i class="fa-solid fa-phone"></i></a></div>`;
-            });
+    function handleLogin() {
+        const u = document.getElementById('lUser').value, p = document.getElementById('lPass').value;
+        if(u === "BRAZILI") { user = { name: "BRAZILI", role: "admin" }; save(); return; }
+        db.ref('users').once('value', s => {
+            let found = false; s.forEach(ch => { if((ch.val().name === u || ch.val().phone === u) && ch.val().pass === p) { user = ch.val(); found = true; save(); } });
+            if(!found) alert("خطأ في البيانات");
         });
     }
 
-    async function adminAddData() {
-        const n = document.getElementById('pNameInput').value, ph = document.getElementById('pPhoneInput').value, 
-              c = document.getElementById('pCatInput').value, d = document.getElementById('pDetailInput').value;
-        await db.ref(c).push({ n, ph, d });
-        showToast("تمت الإضافة");
+    function save() { localStorage.setItem('saree3_user', JSON.stringify(user)); updateUI(); navigateTo('home'); }
+    function handleLogout() { localStorage.removeItem('saree3_user'); user = null; updateUI(); navigateTo('account'); }
+
+    function updateUI() {
+        if(user) {
+            document.getElementById('welcomeMsg').innerText = "مرحباً، " + user.name;
+            document.getElementById('uTitle').innerText = user.name;
+            document.getElementById('authPanel').style.display = 'none';
+            document.getElementById('regPanel').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'block';
+            document.getElementById('adminPanel').style.display = (user.name === "BRAZILI") ? 'block' : 'none';
+        } else {
+            document.getElementById('authPanel').style.display = 'block';
+            document.getElementById('userPanel').style.display = 'none';
+        }
     }
 
-    window.onload = () => {
-        updateUI();
-        sync('drivers', 'driversList', 'fa-car');
-        sync('jobs', 'jobsList', 'fa-screwdriver-wrench');
-        sync('doctors', 'doctorsList', 'fa-user-doctor');
-        db.ref('health_settings/status').on('value', s => document.getElementById('hStatus').innerText = s.val() || "العيادة مفتوحة");
-        setTimeout(() => document.getElementById('splashScreen').style.display = 'none', 2000);
-    };
+    async function handleAdminAdd() {
+        const n = document.getElementById('aName').value, ph = document.getElementById('aPhone').value, c = document.getElementById('aCat').value, d = document.getElementById('aDetail').value;
+        if(n && ph) { await db.ref(c).push({ n, ph, d }); alert("تم الحفظ"); }
+    }
+
+    function startSync() {
+        db.ref('markets').on('value', s => {
+            const d = document.getElementById('mktsDisplay'); d.innerHTML = "";
+            s.forEach(c => { const v = c.val(); d.innerHTML += `<div class="item-card"><b>${v.n}</b><p>${v.d}</p><a href="tel:${v.ph}" style="color:#2ed573;"><i class="fa-solid fa-phone"></i> اتصل</a></div>`; });
+        });
+        db.ref('market_chat').limitToLast(15).on('value', s => {
+            const box = document.getElementById('chatMessages'); box.innerHTML = "";
+            s.forEach(c => { const m = c.val(); box.innerHTML += `<div style="margin-bottom:8px; padding:10px; background:#fff; border-radius:12px; font-size:13px; border-right:4px solid #6C63FF;"><b>${m.sender}:</b> ${m.text}</div>`; });
+            box.scrollTop = box.scrollHeight;
+        });
+        db.ref('drivers').on('value', s => {
+            const r = document.getElementById('rikDisplay'), c = document.getElementById('carDisplay'), t = document.getElementById('truckDisplay');
+            r.innerHTML = ""; c.innerHTML = ""; t.innerHTML = "";
+            s.forEach(ch => {
+                const v = ch.val();
+                const h = `<div class="item-card"><b>${v.n}</b><p>${v.d}</p><a href="tel:${v.ph}" style="color:#6C63FF;"><i class="fa-solid fa-phone"></i></a></div>`;
+                if(v.d.includes("ركشة") || v.d.includes("ركشه")) r.innerHTML += h;
+                else if(v.d.includes("نقل") || v.d.includes("شاحنة")) t.innerHTML += h;
+                else c.innerHTML += h;
+            });
+        });
+        db.ref('jobs').on('value', s => {
+            const d = document.getElementById('jobsDisplay'); d.innerHTML = "<h3 style='margin:10px;'>🛠️ الفنيين المتاحين</h3>";
+            s.forEach(ch => { const v = ch.val(); d.innerHTML += `<div class="item-card"><b>${v.n}</b><p>${v.d}</p><a href="tel:${v.ph}"><i class="fa-solid fa-phone"></i> اطلب الخدمة</a></div>`; });
+        });
+        db.ref('nahda').on('value', s => {
+            const d = document.getElementById('donorsDisplay'); d.innerHTML = "<h3 style='margin:10px;'>🩸 المتبرعين المسجلين</h3>";
+            s.forEach(ch => { const v = ch.val(); d.innerHTML += `<div class="item-card"><b>${v.n}</b><p>فصيلة: ${v.t}</p><a href="tel:${v.ph}" style="color:red;"><i class="fa-solid fa-phone"></i> اتصل فوراً</a></div>`; });
+        });
+        db.ref('doctors').on('value', s => {
+            const d = document.getElementById('docsDisplay'); d.innerHTML = "<h3 style='margin:10px;'>👨‍⚕️ الأطباء والصيدليات</h3>";
+            s.forEach(ch => { const v = ch.val(); d.innerHTML += `<div class="item-card"><b>${v.n}</b><p>${v.d}</p><a href="tel:${v.ph}"><i class="fa-solid fa-phone"></i></a></div>`; });
+        });
+    }
+
+    async function sendChatMessage() {
+        if(!user) return alert("سجل دخولك");
+        const t = document.getElementById('chatInput').value;
+        if(t) { await db.ref('market_chat').push({ sender: user.name, text: t, timestamp: Date.now() }); document.getElementById('chatInput').value = ""; }
+    }
+
+    function searchFatwa() {
+        const q = document.getElementById('fatwaQ').value;
+        if(q) window.open(`https://www.google.com/search?q=${encodeURIComponent(q + " فتاوى إسلامية")}`, '_blank');
+    }
+
+    function sendBooking() {
+        const n = document.getElementById('pntName').value, d = document.getElementById('pntDay').value;
+        if(n) window.open(`https://wa.me/249119298358?text=حجز عيادة: ${n} - يوم ${d}`);
+    }
+
+    async function addDonor() {
+        if(!user) return alert("سجل دخولك أولاً");
+        await db.ref('nahda').push({ n: user.name, ph: user.phone, t: document.getElementById('bloodType').value });
+        alert("شكراً لك! تمت الإضافة");
+    }
+
+    window.onload = () => { updateUI(); startSync(); setTimeout(() => document.getElementById('splashScreen').style.display='none', 1500); };
 </script>
 </body>
 </html>
